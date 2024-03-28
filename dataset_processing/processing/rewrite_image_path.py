@@ -15,7 +15,6 @@ def find_pathology(patient_id, read_csv_path):
             if row["patient_id"] == patient_id:
                 return row["pathology"]
 
-    # If patient_id is not found
     return None
 
 def rewrite(root_folder, read_csv_path, write_csv_path):
@@ -26,8 +25,8 @@ def rewrite(root_folder, read_csv_path, write_csv_path):
     image_paths = {}
     cropped_paths = {}
     masked_paths = {}
-    patient_ids_seen = set()  # To keep track of seen patient IDs
-    file_paths_seen = set()   # To keep track of seen file paths
+    patient_ids_seen = set()
+    file_paths_seen = set()
 
     for root, dirs, files in os.walk(root_folder):
         for file in files:
@@ -48,12 +47,12 @@ def rewrite(root_folder, read_csv_path, write_csv_path):
 
     with open(write_csv_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
-        writer.writerow(["patient_id", "image_path", "cropped_path", "masked_path", "pathology"])  # Add pathology header
+        writer.writerow(["patient_id", "image_path", "cropped_path", "masked_path", "pathology"])
         for image_path, cropped_path, masked_path in zip(image_paths.values(), cropped_paths.values(),
                                                          masked_paths.values()):
-            patient_id = extract_patient_id(image_path)  # Extract patient ID
+            patient_id = extract_patient_id(image_path)
             print(patient_id)
-            pathology = find_pathology(patient_id, read_csv_path)  # Find pathology based on patient ID
+            pathology = find_pathology(patient_id, read_csv_path)
             print(pathology)
             writer.writerow([patient_id, image_path, cropped_path, masked_path, pathology])
 
