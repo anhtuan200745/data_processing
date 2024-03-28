@@ -61,9 +61,7 @@ def rewrite(root_folder, read_csv_path, write_csv_path):
 
 
 
-
-
 root_folder = "D:/Project/dataset_processing/CBIS-DDSM"
 write_csv_path = "data_result.csv"
-read_csv_path = "../mass_case_description_test_set_mini.csv"
+read_csv_path = "mass_case_description_test_set_mini.csv"
 rewrite(root_folder,read_csv_path, write_csv_path)
